@@ -38,6 +38,11 @@ RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
 
 # Change ownership of our applications
 RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 # Expose port 80
 EXPOSE 80
