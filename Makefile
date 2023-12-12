@@ -16,3 +16,5 @@ migrate:
 	docker exec crud_bacend_app bash -c "php artisan migrate"
 seed:
 	docker exec crud_bacend_app bash -c "php artisan db:seed"
+shell:
+	docker exec -it crud_bacend_app bash
