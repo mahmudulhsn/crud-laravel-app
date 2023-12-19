@@ -21,14 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'phone',
         'password',
-        'website',
-        'age',
-        'gender',
-        'nationality',
-        'created_by',
-        'email_verified_at'
     ];
 
     /**
@@ -50,15 +43,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-
-    /**
-     * Get the user that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by', 'id');
-    }
 }

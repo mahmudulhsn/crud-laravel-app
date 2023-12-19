@@ -11,7 +11,6 @@ use App\Interfaces\UserRepositoryInterface;
 
 class UserController extends ApiController
 {
-
     /**
      * userController Constructor
      *
@@ -29,7 +28,7 @@ class UserController extends ApiController
      */
     public function index(): JsonResponse
     {
-        $users = $this->userRepository->getAllUsers(['user']);
+        $users = $this->userRepository->getAllUsers([]);
         return $this->sendResponse('All users.', ['users' => UserResource::collection($users)], 200);
     }
 
@@ -54,7 +53,7 @@ class UserController extends ApiController
      */
     public function show(string $id): JsonResponse
     {
-        $user = $this->userRepository->getUserById($id, ['user']);
+        $user = $this->userRepository->getUserById($id, []);
         return $this->sendResponse('Single user', ['user' => new UserResource($user)], 200);
     }
 
