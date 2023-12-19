@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -21,8 +22,35 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string', Rule::unique('users')->ignore($this->user)],
+            'phone' => ['required', 'string', Rule::unique('users')->ignore($this->user)],
+            'password' => ['required', 'string', 'min:6'],
+            'website' => ['required', 'string'],
+            'age' => ['required', 'string'],
+            'gender' => ['required', 'string'],
+            'nationality' => ['required', 'string'],
+            'created_by' => ['required', 'numeric'],
+            'email_verified_at' => ['nullable', 'string']
         ];
+
+        if ($this->user) {
+            $rules['password'] = ['nullable'];
+        }
+
+        return $rules;
+    }
+
+    /**
+     * prepare the validation
+     *
+     * @return void
+     */
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'created_by' => auth()->id()
+        ]);
     }
 }

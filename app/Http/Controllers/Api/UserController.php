@@ -29,7 +29,7 @@ class UserController extends ApiController
      */
     public function index(): JsonResponse
     {
-        $users = $this->userRepository->getAllUsers([]);
+        $users = $this->userRepository->getAllUsers(['user']);
         return $this->sendResponse('All users.', ['users' => UserResource::collection($users)], 200);
     }
 
@@ -43,7 +43,7 @@ class UserController extends ApiController
         $userInfo = $request->validated();
         $user = $this->userRepository->createUser($userInfo);
 
-        return $this->sendResponse('user has been created.', ['user' => new UserResource($user)], 201);
+        return $this->sendResponse('User has been created.', ['user' => new UserResource($user)], 201);
     }
 
     /**
@@ -54,7 +54,7 @@ class UserController extends ApiController
      */
     public function show(string $id): JsonResponse
     {
-        $user = $this->userRepository->getUserById($id, []);
+        $user = $this->userRepository->getUserById($id, ['user']);
         return $this->sendResponse('Single user', ['user' => new UserResource($user)], 200);
     }
 
@@ -72,7 +72,7 @@ class UserController extends ApiController
             $this->userRepository->updateUser($user, $userInfo);
 
         }
-        return $this->sendResponse('user has been  Updated.', ['user' => new UserResource($user)], 201);
+        return $this->sendResponse('User has been  Updated.', ['user' => new UserResource($user)], 201);
     }
 
     /**
@@ -88,6 +88,6 @@ class UserController extends ApiController
 
             $this->userRepository->deleteUser($user);
         }
-        return $this->sendResponse('user has been Deleted.', [], 200);
+        return $this->sendResponse('User has been Deleted.', [], 200);
     }
 }

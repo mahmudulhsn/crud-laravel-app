@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('age')->nullable();
             $table->string('gender')->nullable();
             $table->string('nationality')->nullable();
-            $table->unsignedInteger('create_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
