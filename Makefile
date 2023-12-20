@@ -16,6 +16,8 @@ migrate:
 	docker exec crud_bacend_app bash -c "php artisan migrate"
 seed:
 	docker exec crud_bacend_app bash -c "php artisan db:seed"
+key:
+	docker exec crud_bacend_app bash -c "php artisan key:generate"
 passport:
 	docker exec crud_bacend_app bash -c "php artisan passport:install"
 shell:
