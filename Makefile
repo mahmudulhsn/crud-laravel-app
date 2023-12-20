@@ -1,20 +1,27 @@
-setup:
-	@make build
-	@make start
-	@make composer-update
-build:
-	docker-compose build --no-cache --force-rm
-stop:
-	docker-compose stop
-down:
-	docker-compose down
 start:
-	docker-compose up -d
+	./vendor/bin/sail up -d
+
+down:
+	./vendor/bin/sail down
+
 composer-update:
-	docker exec crud_bacend_app bash -c "composer update"
+	./vendor/bin/sail composer update
+
 migrate:
-	docker exec crud_bacend_app bash -c "php artisan migrate"
+	./vendor/bin/sail php artisan migrate
+
+passport:
+	./vendor/bin/sail php artisan passport:install
+
 seed:
-	docker exec crud_bacend_app bash -c "php artisan db:seed"
-shell:
-	docker exec -it crud_bacend_app bash
+	./vendor/bin/sail php artisan db:seed
+
+key:
+	./vendor/bin/sail php artisan key:generate
+
+setup:
+    @make start
+    @make key
+    @make migrate
+    @make seed
+    @make passport
